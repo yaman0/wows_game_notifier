@@ -24,7 +24,7 @@ defmodule DiscordBot do
     opts = [strategy: :one_for_one, name: MyBot]
     Supervisor.start_link(children, opts)
 
-    run = Client.start("NDE0MTc3NjE0NTg1MDA0MDYy.WodS9g.r9MMwknDPvQQgVUlCfa65ghVrd0")
+    run = Client.start(Application.fetch_env!(:wows_game_notifier, :discord_token))
     use Commands
     run
   end
