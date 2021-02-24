@@ -4,11 +4,12 @@ defmodule WowsGameNotifier.Player do
 
   schema "players" do
     field :playername, :string
+    field :account_id, :string
   end
 
   def changeset(player, params \\ %{}) do
     player
-    |> cast(params, [:playername])
+    |> cast(params, [:playername, :account_id])
     |> validate_required([:playername])
     |> unique_constraint(:playername)
   end

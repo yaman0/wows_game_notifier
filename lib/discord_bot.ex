@@ -1,19 +1,28 @@
 defmodule DiscordBot do
   use Application
   alias Alchemy.Client
+  alias WowsGameNotifier.Player.Task.SubscribePlayer
+
 
   defmodule Commands do
     use Alchemy.Cogs
+
+    @wows_profile_uri "https://worldofwarships.eu/en/community/accounts/"
 
     Cogs.def ping do
       Cogs.say "pong!"
     end
 
     Cogs.def sub(username) do
-      case WowsGameNotifier.Player.Players.create_player(username) do
+      case SubscribePlayer.subscribe(username) do
         :player_already_exist -> Cogs.say "player already subscribed"
-        _ -> Cogs.say "subscribing to player : " <> username
+        {:ok, player} ->
+           Cogs.say "subscribing to player : " <> player.playername <> "(" <> generate_uri(player) <> ")"
       end
+    end
+
+    defp generate_uri(player) do
+      @wows_profile_uri <> player.account_id <> "-" <> player.playername <> "/"
     end
   end
 
