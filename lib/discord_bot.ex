@@ -22,7 +22,7 @@ defmodule DiscordBot do
     end
 
     defp generate_uri(player) do
-      @wows_profile_uri <> player.account_id <> "-" <> player.playername <> "/"
+      @wows_profile_uri <> Integer.to_string(player.account_id) <> "-" <> player.playername <> "/"
     end
   end
 

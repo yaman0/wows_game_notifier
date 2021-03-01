@@ -3,7 +3,7 @@ defmodule Persistence.Repo.Migrations.AddingAccountIdTPlayer do
 
   def change do
     alter table(:players) do
-      add :account_id, :string
+      add :account_id, :integer
     end
   end
 end
