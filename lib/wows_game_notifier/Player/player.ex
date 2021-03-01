@@ -1,4 +1,8 @@
 defmodule WowsGameNotifier.Player do
+  @moduledoc """
+  player entity from players schemas
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -11,6 +15,9 @@ defmodule WowsGameNotifier.Player do
     field :xp, :integer
   end
 
+  @doc """
+  parse and validate player before persist
+  """
   def changeset(player, params \\ %{}) do
     player
     |> cast(params, [:playername, :account_id, :damage_dealt, :wins, :frags, :xp])

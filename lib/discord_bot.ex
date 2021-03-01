@@ -1,4 +1,8 @@
 defmodule DiscordBot do
+   @moduledoc """
+    discord bot
+    """
+
   use Application
   alias Alchemy.Client
   alias WowsGameNotifier.Player.Task.SubscribePlayer
@@ -9,10 +13,17 @@ defmodule DiscordBot do
 
     @wows_profile_uri "https://worldofwarships.eu/en/community/accounts/"
 
+    @doc """
+    answer ping with pong (testing function)
+    warning: should be deprecated
+    """
     Cogs.def ping do
       Cogs.say "pong!"
     end
 
+    @doc """
+    subscribe player name
+    """
     Cogs.def sub(username) do
       case SubscribePlayer.subscribe(username) do
         :player_already_exist -> Cogs.say "player already subscribed"
@@ -26,6 +37,9 @@ defmodule DiscordBot do
     end
   end
 
+  @doc """
+  start application
+  """
   def start(_type, _args) do
     children = [
       Persistence.Repo,
