@@ -4,6 +4,7 @@ defmodule WowsGameNotifier.Player.Players do
     """
     alias Persistence.Repo
     alias WowsGameNotifier.Player
+    alias WowsGameNotifier.Stat
     require Logger
 
     @doc """
@@ -18,4 +19,19 @@ defmodule WowsGameNotifier.Player.Players do
             ok_result -> ok_result
         end
     end
+
+    @spec update_player_stat(Player, Stat):: {atom, Player}
+    def update_player_stat(player, stat) do
+        Player.changeset(player, Map.from_struct(stat)) |> Repo.update()
+    end
 end
+
+"""
+p = Player |> Persistence.Repo.all |> hd
+s = %WowsGameNotifier.Stat{
+    damage_dealt: 14194244,
+    frags: 348,
+    wins: 294,
+    xp: 795264
+  }
+"""
