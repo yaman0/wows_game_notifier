@@ -43,6 +43,7 @@ defmodule DiscordBot do
   def start(_type, _args) do
     children = [
       Persistence.Repo,
+      AppScheduler
     ]
     opts = [strategy: :one_for_one, name: MyBot]
     Supervisor.start_link(children, opts)
